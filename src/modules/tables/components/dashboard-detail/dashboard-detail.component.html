@@ -1,0 +1,186 @@
+
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li *ngFor="let id of tabs" [ngbNavItem]="id">
+          <a ngbNavLink>
+           {{ id }}
+          </a>
+          <ng-template ngbNavContent>
+            <form class="form" [formGroup]="formData">
+              <div class="form-group row mb-3 mt-3 ml-3">
+                <label for="tenderTitle" class="col-sm-2 col-form-label">Tender Title:*</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control py-4" 
+                  formControlName="tenderName"
+                  autocomplete="off"
+                  placeholder="Enter Tender Title" id="tenderTitle">
+                </div>
+              </div>
+              <div
+              *ngIf="
+              formData.controls['tenderName'].invalid &&
+              (formData.controls['tenderName'].dirty ||
+                  formData.controls['tenderName'].touched)
+              "
+              class="alert alert-danger"
+              >
+              <div *ngIf="formData.controls['tenderName'].errors.required">
+              Tender Title Required
+              </div>
+              </div>
+              <div class="form-group row mb-3 mt-3 ml-3">
+                <label for="TenderNumber" class="col-sm-2 col-form-label">Tender Number:*</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control py-4" 
+                  formControlName="tenderNumber"
+                  autocomplete="off"
+                  placeholder="Enter Tender Number" id="tenderNumber1">
+                </div>
+              </div>
+
+              <div
+              *ngIf="
+              formData.controls['tenderNumber'].invalid &&
+              (formData.controls['tenderNumber'].dirty ||
+                  formData.controls['tenderNumber'].touched)
+              "
+              class="alert alert-danger"
+              >
+                <div *ngIf="formData.controls['tenderNumber'].errors.required">
+                Tender Ref Required
+                </div>
+              </div>
+
+              <div class="form-group row mb-4 mt-4 ml-3">
+                <label for="TenderNumber" class="col-sm-2 mt-5 col-form-label">Release Date:*</label>
+                <div class="col-sm-4 mt-5">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd-mm-yyyy"
+                           name="dp1" [minDate]="minDate" [maxDate]="maxDate" formControlName="tenderReleaseDate" ngbDatepicker #d1="ngbDatepicker" >
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()"  type="button"></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 mt-2">
+                  <div class="input-group">
+                    <ngb-timepicker formControlName="tenderReleaseTime" ></ngb-timepicker>
+                  </div>
+                </div>
+              </div>
+
+              <div
+              *ngIf="
+              formData.controls['tenderReleaseDate'].invalid &&
+              (formData.controls['tenderReleaseDate'].dirty ||
+                  formData.controls['tenderReleaseDate'].touched)
+              "
+              class="alert alert-danger"
+              >
+                <div *ngIf="formData.controls['tenderReleaseDate'].errors.required">
+                 Release Date is Required
+                </div>
+                <div *ngIf="formData.controls['tenderReleaseDate'].errors.dateInvalid">
+                Release Date must be greater than today
+                </div>
+                <div *ngIf="formData.controls['tenderReleaseDate'].errors.customRules">
+                Release Date cannot greater than Closing Date
+                </div>
+              </div>
+              <div *ngIf="formData.errors != null" class="alert alert-danger">
+                <div *ngIf="formData.errors.customRules">
+                Release Date cannot greater than Closing Date
+                </div>
+              </div>
+              <div
+              *ngIf="
+              formData.controls['tenderReleaseTime'].invalid &&
+              (formData.controls['tenderReleaseTime'].dirty ||
+                  formData.controls['tenderReleaseTime'].touched)
+              "
+              class="alert alert-danger"
+              >
+                <div *ngIf="formData.controls['tenderReleaseTime'].errors.required">
+                Release Time is Required
+                </div>
+              </div>
+
+              <div class="form-group row mb-4 mt-2 ml-3">
+                <label for="TenderNumber" class="col-sm-2 mt-5 col-form-label">Closing Date:*</label>
+                <div class="col-sm-4 mt-5">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd-mm-yyyy"
+                           name="dp" [minDate]="minDate" [maxDate]="maxDate" formControlName="tenderClosingDate" ngbDatepicker #d="ngbDatepicker" >
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"  type="button"></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 mt-2">
+                  <div class="input-group">
+                    <ngb-timepicker formControlName="tenderClosingTime" ></ngb-timepicker>
+                  </div>
+                </div>
+              </div>
+
+              <div
+              *ngIf="
+              formData.controls['tenderClosingDate'].invalid &&
+              (formData.controls['tenderClosingDate'].dirty ||
+                  formData.controls['tenderClosingDate'].touched)
+              "
+              class="alert alert-danger"
+              >
+              <div *ngIf="formData.controls['tenderClosingDate'].errors.required">
+              Closing Date Required
+              </div>
+              <div *ngIf="formData.controls['tenderClosingDate'].errors.dateInvalid">
+              Closing Date must be greater than today
+              </div>
+              </div>
+              <div
+              *ngIf="
+              formData.controls['tenderClosingTime'].invalid &&
+              (formData.controls['tenderClosingTime'].dirty ||
+                  formData.controls['tenderClosingTime'].touched)
+              "
+              class="alert alert-danger"
+              >
+                <div *ngIf="formData.controls['tenderClosingTime'].errors.required">
+                Tender Release Time Required
+                </div>
+              </div>
+              <div class="form-group row mb-3 mt-3 ml-3">
+                <label for="TenderNumber" class="col-sm-2 col-form-label">Description:*</label>
+                <div class="col-sm-10">
+                
+                  <textarea
+                  id="comments"
+                  rows="9"
+                  class="form-control"
+                  formControlName="description" 
+                ></textarea>
+                </div>
+              </div>
+
+              <div
+              *ngIf="
+              formData.controls['description'].invalid &&
+              (formData.controls['description'].dirty ||
+                  formData.controls['description'].touched)
+              "
+              class="alert alert-danger"
+              >
+                <div *ngIf="formData.controls['description'].errors.required">
+                Description is Required
+                </div>
+              </div>
+            </form>
+
+          </ng-template>
+        </li>
+      </ul>
+
+      <div [ngbNavOutlet]="nav"></div>
+      <div *ngIf="isEdit">
+        <button class="btn btn-primary float-right" [class.disabled]="!formData.valid" (click)="save($event)">{{buttonText}}</button>
+      </div>

@@ -1,0 +1,46 @@
+<form>
+    <div class="form-group form-inline"><span class="ml-3" *ngIf="tenderService.loading$ | async">Loading...</span></div>
+    <div class="table-responsive">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th scope="col" sbSortable="tenderId" (sort)="onSort($event)"><span>Tender ID</span><sb-sort-icon *ngIf='sortedColumn === "tenderId"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col" sbSortable="tenderNumber" (sort)="onSort($event)"><span>Contract No</span><sb-sort-icon *ngIf='sortedColumn === "tenderNumber"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col" sbSortable="tenderName" (sort)="onSort($event)"><span>Tender Name</span><sb-sort-icon *ngIf='sortedColumn === "tenderName"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col" sbSortable="tenderReleaseDate" (sort)="onSort($event)"><span>Release Date</span><sb-sort-icon *ngIf='sortedColumn === "tenderReleaseDate"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col" sbSortable="tenderClosingDate" (sort)="onSort($event)"><span>Closing Date</span><sb-sort-icon *ngIf='sortedColumn === "tenderClosingDate"' [direction]="sortedDirection"></sb-sort-icon></th>
+                <th scope="col"><span>Action</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tender of tenders$ | async">
+                <td class="align-middle">{{ tender.tenderId }}</td>
+                <td class="align-middle">{{ tender.tenderNumber }}</td>
+                <td class="align-middle">{{ tender.tenderName }}</td>
+                <td class="align-middle">{{ tender.tenderReleaseDate | date:'dd/MM/yyyy'}}</td>
+                <td class="align-middle">{{ tender.tenderClosingDate | date:'dd/MM/yyyy'}}</td>
+                <td>
+                    <button class="btn btn-primary mr-1" (click)="goToDetail(tender)"><fa-icon [icon]='["fas", "search"]'></fa-icon></button><button class="btn btn-warning mr-1" (click)="goToEdit(tender)"><fa-icon [icon]='["fas", "edit"]'></fa-icon></button><button class="btn btn-danger" (click)="goToDelete(content,tender)"><fa-icon [icon]='["fas", "trash"]'></fa-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="total$ | async" [(page)]="tenderService.page" [pageSize]="tenderService.pageSize"></ngb-pagination
+        ><select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="tenderService.pageSize">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="6">6 items per page</option>
+        </select>
+    </div>
+</form>
+<ng-template #content=""
+    ><div class="modal-body">
+        <div class="text-center"><h3 class="title mb-4">Delete Confirmation</h3></div>
+        <div class="text-center mt-4">
+            Are you sure want to delete id : {{tenderId}} ?
+            <div class="text-center mt-4"><button class="btn btn-default mr-2" (click)="cancel()">No</button><button class="btn btn-danger" (click)="delete()">Yes</button></div>
+        </div>
+    </div></ng-template
+>

@@ -1,0 +1,13 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Tender Detail" [hideBreadcrumbs]="true"></sb-dashboard-head>
+  <sb-card>
+    <div class="card-header">
+      eProcure Tender Management
+      <button class="btn btn-success float-right"(click)="goToEdit()"><fa-icon class="mr-1" [icon]='["fas", "edit"]'></fa-icon>Edit</button>
+      <button class="btn btn-primary float-right mr-1"(click)="goToList()"><fa-icon class="mr-1" [icon]='["fas", "arrow-left"]'></fa-icon>Back</button>
+    </div>
+    <div class="card-body">
+      <sb-dashboard-detail [tender]="tender"  [isEdit]="isEdit" [method]="method"  [buttonText]="buttonText"></sb-dashboard-detail>
+    </div>
+  </sb-card>
+</sb-layout-dashboard>

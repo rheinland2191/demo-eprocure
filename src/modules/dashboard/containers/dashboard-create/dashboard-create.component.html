@@ -1,0 +1,13 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Create Tender" [hideBreadcrumbs]="true"></sb-dashboard-head>
+  <sb-card>
+    <div class="card-header">
+      eProcure Tender Management
+      <button class="btn btn-primary float-right"(click)="goToList()"><fa-icon class="mr-1" [icon]='["fas", "arrow-left"]'></fa-icon>Back</button>
+    </div>
+    <div class="card-body">
+      <sb-dashboard-detail [tender]="tender" [isEdit]="isEdit" [method]="method"  [buttonText]="buttonText" (submit)="save($event)"></sb-dashboard-detail>
+    </div>
+  </sb-card>
+</sb-layout-dashboard>
+

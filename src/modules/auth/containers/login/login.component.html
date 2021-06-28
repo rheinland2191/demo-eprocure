@@ -1,0 +1,65 @@
+<sb-layout-auth
+    ><div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Welcome Back!</h3></div>
+                    <div class="card-body">
+                        <form class="form" [formGroup]="formData">
+                            <div class="form-group">
+                                <input
+                                    type="email"
+                                    class="form-control py-4"
+                                    formControlName="email"
+                                    autocomplete="off"
+                                    placeholder="Enter email address"
+                                />
+                            </div>
+                            <div
+                            *ngIf="
+                            formData.controls['email'].invalid &&
+                            (formData.controls['email'].dirty ||
+                                formData.controls['email'].touched)
+                            "
+                            class="alert alert-danger"
+                            >
+                            <div *ngIf="formData.controls['email'].errors.required">
+                            Email Required
+                            </div>
+                            <div *ngIf="formData.controls['email'].errors.email">
+                            Email is not valid
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <input
+                                    type="password"
+                                    class="form-control py-4"
+                                    formControlName="password"
+                                    autocomplete="off"
+                                    placeholder="Enter password"
+                                />
+                            </div>
+
+                            <div
+                            *ngIf="
+                            formData.controls['password'].invalid &&
+                            (formData.controls['password'].dirty ||
+                                formData.controls['password'].touched)
+                            "
+                            class="alert alert-danger"
+                            >
+                            <div *ngIf="formData.controls['password'].errors.required">
+                            Password Required
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox"><input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" /><label class="custom-control-label" for="rememberPasswordCheck">Remember password</label></div>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"><a class="btn btn-primary" [class.disabled]="!formData.valid" (click)="doLogin()">Login</a></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></sb-layout-auth
+>
